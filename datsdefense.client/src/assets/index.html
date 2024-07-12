@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Grid</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+    <script>
+        // Получаем элемент canvas и его контекст
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Размеры сетки
+        const gridSize = 40;
+        const rows = 10;
+        const cols = 10;
+
+        // Цвета
+        const colors = {
+            lightgreen: '#90EE90',
+            green: '#008000',
+            red: '#8B0000',
+            blue: '#0000FF',
+            selected: '#FFD700' // Золотой цвет для выделения
+        };
+
+        // Состояние сетки (хранение цветов)
+        const gridState = Array.from({ length: rows }, () => Array(cols).fill(colors.lightgreen));
+
+        // Изначальные квадраты
+        gridState[1][1] = colors.blue;
+        gridState[1][3] = colors.blue;
+        gridState[2][2] = colors.red;
+        
+        gridState[1][8] = colors.blue;
+        gridState[2][7] = colors.red;
+        
+        gridState[5][7] = colors.green;
+        gridState[4][8] = colors.red;
+        gridState[1][8] = colors.blue;
+
+        // Функция для рисования сетки и квадратов
+        function drawGrid() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Рисуем сетку
+            for (let i = 0; i <= cols; i++) {
+                ctx.moveTo(i * gridSize, 0);
+                ctx.lineTo(i * gridSize, rows * gridSize);
+            }
+            for (let i = 0; i <= rows; i++) {
+                ctx.moveTo(0, i * gridSize);
+                ctx.lineTo(cols * gridSize, i * gridSize);
+            }
+            ctx.strokeStyle = '#ddd';
+            ctx.stroke();
+
+            // Рисуем квадраты
+            for (let y = 0; y < rows; y++) {
+                for (let x = 0; x < cols; x++) {
+                    ctx.fillStyle = gridState[y][x];
+                    ctx.fillRect(x * gridSize, y * gridSize, gridSize, gridSize);
+                }
+            }
+        }
+
+        // Обработчик событий для выделения клеток
+        canvas.addEventListener('click', (event) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            const col = Math.floor(x / gridSize);
+            const row = Math.floor(y / gridSize);
+
+            // Переключение цвета выделения
+            gridState[row][col] = gridState[row][col] === colors.selected ? colors.lightgreen : colors.selected;
+
+            drawGrid();
+        });
+
+        // Инициализация сетки
+        drawGrid();
+    </script>
+</body>
+</html>
