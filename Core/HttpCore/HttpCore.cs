@@ -39,7 +39,8 @@ namespace Core.Algoritms
 
         public async Task<UnitsResponse> DynamicMap()
         {
-            return await devteamClient.UnitsAsync();
+                var result = await devteamClient.UnitsAsync();
+            return result;
         }
 
         public async Task<MapResponse> StaticMap()
