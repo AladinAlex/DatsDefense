@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <canvas id="myCanvas" width="400" height="400"></canvas>
+    <canvas id="myCanvas" width="800" height="800"></canvas>
     <script>
         // Получаем элемент canvas и его контекст
         const canvas = document.getElementById('myCanvas');
@@ -19,8 +19,8 @@
 
         // Размеры сетки
         const gridSize = 40;
-        const rows = 10;
-        const cols = 10;
+        const rows = 40;
+        const cols = 40;
 
         // Цвета
         const colors = {
@@ -70,21 +70,21 @@
                 }
             }
         }
-
+		
         // Обработчик событий для выделения клеток
-        canvas.addEventListener('click', (event) => {
-            const rect = canvas.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
+        // canvas.addEventListener('click', (event) => {
+        //     const rect = canvas.getBoundingClientRect();
+        //     const x = event.clientX - rect.left;
+        //     const y = event.clientY - rect.top;
 
-            const col = Math.floor(x / gridSize);
-            const row = Math.floor(y / gridSize);
+        //     const col = Math.floor(x / gridSize);
+        //     const row = Math.floor(y / gridSize);
 
-            // Переключение цвета выделения
-            gridState[row][col] = gridState[row][col] === colors.selected ? colors.lightgreen : colors.selected;
+        //     // Переключение цвета выделения
+        //     gridState[row][col] = gridState[row][col] === colors.selected ? colors.lightgreen : colors.selected;
 
-            drawGrid();
-        });
+        //     drawGrid();
+        // });
 
         // Инициализация сетки
         drawGrid();
