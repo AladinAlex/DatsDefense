@@ -161,18 +161,19 @@ onMounted(() => {
 
     if (!props.mini) {
         document.addEventListener('keydown', (event) => {
+            const step = gridSize + 20
             switch (event.key) {
                 case 'ArrowUp':
-                    moveGrid(0, gridSize);
+                    moveGrid(0, step);
                     break;
                 case 'ArrowDown':
-                    moveGrid(0, -gridSize);
+                    moveGrid(0, -step);
                     break;
                 case 'ArrowLeft':
-                    moveGrid(gridSize, 0);
+                    moveGrid(step, 0);
                     break;
                 case 'ArrowRight':
-                    moveGrid(-gridSize, 0);
+                    moveGrid(-step, 0);
                     break;
             }
         })
@@ -194,11 +195,11 @@ onMounted(() => {
 
         if (object) {
             if (object.type === 'base') {
-                emit('click', { x: object.x, y: object.y, type: 1 })
+                emit('click', { x: Math.round(object.x), y: Math.round(object.y), type: 1 })
             }
         }
         else {
-            emit('click', { x: xGrid, y: yGrid, type: 2 })
+            emit('click', { x: Math.round(xGrid), y: Math.round(yGrid), type: 2 })
         }
     });
     setTimeout(() => {

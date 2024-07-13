@@ -49,7 +49,7 @@ start()
         <button @click="start">Старт</button>
         <button @click="mainStore.StopRound">Стоп</button>
         <button @click="mainStore.GoWithoutStart">Без старта запустить логику</button>
-        <div class="log">
+        <!-- <div class="log">
           <div>
             <span class="text">Логи: </span>
           </div>
@@ -58,9 +58,9 @@ start()
               {{ log }}
             </span>
           </div>
-        </div>
+        </div> -->
 
-        <div class="error">
+        <!-- <div class="error">
           <div>
             <span class="text">Ошибки: </span>
           </div>
@@ -69,13 +69,8 @@ start()
               {{ err }}
             </span>
           </div>
-        </div>
+        </div> -->
       </div>
-    </div>
-    <div>
-      Action:
-      <button>Купить клетку</button>
-      <button>Перемещение</button>
     </div>
   </main>
 
