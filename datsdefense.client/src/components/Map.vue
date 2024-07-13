@@ -161,6 +161,7 @@ onMounted(() => {
 
     if (!props.mini) {
         document.addEventListener('keydown', (event) => {
+            const step = gridSize + 20
             const step = gridSize + 30;
             switch (event.key) {
                 case 'ArrowUp':
@@ -195,11 +196,11 @@ onMounted(() => {
 
         if (object) {
             if (object.type === 'base') {
-                emit('click', { x: object.x, y: object.y, type: 1 })
+                emit('click', { x: Math.round(object.x), y: Math.round(object.y), type: 1 })
             }
         }
         else {
-            emit('click', { x: xGrid, y: yGrid, type: 2 })
+            emit('click', { x: Math.round(xGrid), y: Math.round(yGrid), type: 2 })
         }
     });
     setTimeout(() => {
