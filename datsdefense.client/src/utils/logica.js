@@ -252,7 +252,7 @@ export const GetBuilds = (bases, enemyBlocks, zombies, zpots, wall, gold) => {
             console.log('bases is empty')
             return allNewBlocks
         }
-        
+        console.log('ВСЕ НАШИ БАЗЫ ПРИ постройке нового', bases)
     let r;
     bases?.forEach((a) => {
         r = GetBuild(a, bases, enemyBlocks, zombies, zpots, wall, gold)
@@ -315,12 +315,16 @@ export const GetBuild = (base, bases, enemyBlocks, zombies, zpots, wall, gold) =
 export const CheckToBuild = (x, y, bases, enemyBlocks, zombies, zpots, wall) => {
 
     const existBase = bases?.find(b => b.x === x && b.y === y)
-    if(existBase)
+    if(existBase) {
+        console.log('Проблема в НАШЕЙ БАЗЕ')  
         return false
+    }
 
     const existZombie = zombies?.find(zmb => zmb.x === x && zmb.y === y )
-    if(existZombie)
+    if(existZombie) {
+        console.log('Проблема в ЗОМБИ')  
         return false
+    }
     
     // const existEnemyBlock = enemyBlocks?.find(eb => eb.x === x && eb.y === y )
     // if(existEnemyBlock)
@@ -338,16 +342,22 @@ export const CheckToBuild = (x, y, bases, enemyBlocks, zombies, zpots, wall) => 
         }
     }
 
-    if(!existEnemyNear)
+    if(!existEnemyNear) {
+        console.log('Проблема в СОСЕДЕ')  
         return false
+    }
 
     let existZpotNear = canBuildBaseBlock(x, y, zpots)
-    if(!existZpotNear)
+    if(!existZpotNear) {
+        console.log('Проблема в СПОТЕ')  
         return false
+    }
 
     let existWallNear = canBuildBaseBlock(x, y, wall)
-    if(!existWallNear)
+    if(!existWallNear) {
+        console.log('Проблема в СТЕНЕ')  
         return false
+    }
 
     return true
 }

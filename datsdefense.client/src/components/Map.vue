@@ -229,13 +229,13 @@ onMounted(() => {
         }
     }
     const setCenterToBase = () => {
-        if (mainStore.data.Units.base && mainStore.data.Units.base.length) {
-            const findHead = mainStore.data.Units.base.find(x => x.isHead)
-            if (findHead) {
-                gridOffsetX = findHead.x * gridSize
-                gridOffsetY = findHead.y * gridSize
-            }
-        }
+        // if (mainStore.data.Units.base && mainStore.data.Units.base.length) {
+        //     const findHead = mainStore.data.Units.base.find(x => x.isHead)
+        //     if (findHead) {
+        //         gridOffsetX = findHead.x * gridSize
+        //         gridOffsetY = findHead.y * gridSize
+        //     }
+        // }
     }
     watch(() => mainStore.data.World.zpots, () => {
         // setCenterToBase()
