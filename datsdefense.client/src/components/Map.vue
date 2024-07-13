@@ -237,22 +237,22 @@ onMounted(() => {
         }
     }
     watch(() => mainStore.data.World.zpots, () => {
-        setCenterToBase()
+        // setCenterToBase()
         reacalState()
         drawGrid()
     }, { deep: true })
     watch(() => mainStore.data.Units.base, () => {
-        setCenterToBase()
+        // setCenterToBase()
         reacalState()
         drawGrid()
     }, { deep: true })
     watch(() => mainStore.data.Units.zombies, () => {
-        setCenterToBase()
+        // setCenterToBase()
         reacalState()
         drawGrid()
     }, { deep: true })
     watch(() => mainStore.data.Units.enemyBlocks, () => {
-        setCenterToBase()
+        // setCenterToBase()
         reacalState()
         drawGrid()
     }, { deep: true })
