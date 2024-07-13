@@ -1,3 +1,5 @@
+import { transformVNodeArgs } from "vue";
+
 const typePriority = {
     "juggernaut": 1,
     "liner": 2,
@@ -244,15 +246,20 @@ export const CheckMainBlockAndChange = (currentHealth, prevHealth, bases) => {
 
 export const GetBuilds = (bases, enemyBlocks, zombies, zpots, wall, gold) => {
     let allNewBlocks = []
+    console.log('start get builds')
     if(!Array.isArray(bases) || bases.length < 1)
-        return allNewBlocks
-
+        {
+            console.log('bases is empty')
+            return allNewBlocks
+        }
+        
     let r;
     bases?.forEach((a) => {
         r = GetBuild(a, bases, enemyBlocks, zombies, zpots, wall, gold)
         allNewBlocks.concat(r)
-      });
-
+    });
+    
+    console.log('return allNewBlocks', allNewBlocks)
       return allNewBlocks
 }
 
