@@ -52,11 +52,11 @@ start()
           <div>
             <span class="text">Логи: </span>
           </div>
-          <div v-for="(log, i) in mainStore.data.CommandResult" :key="i" class="inner_log">
+          <!-- <div v-for="(log, i) in mainStore.data.CommandResult" :key="i" class="inner_log">
             <span class="text">
               {{ log }}
             </span>
-          </div>
+          </div> -->
         </div>
 
         <div class="error">
