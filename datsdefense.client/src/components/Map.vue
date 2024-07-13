@@ -1,9 +1,9 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import world from '@/data/world.json'
-import units from '@/data/units.json'
-const canvas = ref(null)
+import { ref, onMounted, computed, watch } from 'vue'
+import { useMainStore } from '@/store/mainStore'
 
+const canvas = ref(null)
+const mainStore = useMainStore()
 const props = defineProps({
     size: {
         width: 900,
@@ -11,6 +11,7 @@ const props = defineProps({
     },
     mini: false
 })
+const emit = defineEmits(['click'])
 const images = {
     base: null,
     normal: null,
@@ -47,23 +48,24 @@ onMounted(() => {
     ctx.lineWidth = props.mini ? 0 : 0.5;
 
     const state = []
-    if (world.zpots) {
-        world.zpots.forEach(spot => {
+
+    if (mainStore.data.World.zpots) {
+        mainStore.data.World.zpots.forEach(spot => {
             state.push(spot)
         })
     }
-    if (units.base) {
-        units.base.forEach(base => {
+    if (mainStore.data.Units.base) {
+        mainStore.data.Units.base.forEach(base => {
             state.push({ x: base.x, y: base.y, type: 'base', isHead: base.isHead, health: base.health })
         })
     }
-    if (units.zombies) {
-        units.zombies.forEach(zombie => {
+    if (mainStore.data.Units.zombies) {
+        mainStore.data.Units.zombies.forEach(zombie => {
             state.push({ x: zombie.x, y: zombie.y, type: zombie.type, isZombie: true, speed: zombie.speed, direction: zombie.direction, health: zombie.health })
         })
     }
-    if (units.enemyBlocks) {
-        units.enemyBlocks.forEach(enemy => {
+    if (mainStore.data.Units.enemyBlocks) {
+        mainStore.data.Units.enemyBlocks.forEach(enemy => {
             state.push({ x: enemy.x, y: enemy.y, type: enemy.type, isHead: enemy.isHead, health: enemy.health })
         })
     }
@@ -184,15 +186,67 @@ onMounted(() => {
         const xGrid = Math.floor(x / gridSize) - gridOffsetX / gridSize;
         const yGrid = Math.floor(y / gridSize) - gridOffsetY / gridSize;
         const object = state.find(x => x.x == xGrid && x.y == yGrid)
-        console.log(object)
 
-        // gridState[row][col] = gridState[row][col] === colors.selected ? colors.lightgreen : colors.selected;
-        // drawGrid();
+        if (object) {
+            if (object.type === 'base') {
+                emit('click', { x: object.x, y: object.y, type: 1 })
+            }
+        }
+        else {
+            emit('click', { x: xGrid, y: yGrid, type: 2 })
+        }
     });
     setTimeout(() => {
         drawGrid();
     }, 5000);
-
+    watch(() => mainStore.world.value, () => {
+        state.length = 0
+        if (mainStore.data.World.zpots) {
+            mainStore.data.World.zpots.forEach(spot => {
+                state.push(spot)
+            })
+        }
+        if (mainStore.data.Units.base) {
+            mainStore.data.Units.base.forEach(base => {
+                state.push({ x: base.x, y: base.y, type: 'base', isHead: base.isHead, health: base.health })
+            })
+        }
+        if (mainStore.data.Units.zombies) {
+            mainStore.data.Units.zombies.forEach(zombie => {
+                state.push({ x: zombie.x, y: zombie.y, type: zombie.type, isZombie: true, speed: zombie.speed, direction: zombie.direction, health: zombie.health })
+            })
+        }
+        if (mainStore.data.Units.enemyBlocks) {
+            mainStore.data.Units.enemyBlocks.forEach(enemy => {
+                state.push({ x: enemy.x, y: enemy.y, type: enemy.type, isHead: enemy.isHead, health: enemy.health })
+            })
+        }
+        drawGrid()
+    }, { deep: true })
+    watch(() => mainStore.units.value, () => {
+        state.length = 0
+        if (mainStore.data.World.zpots) {
+            mainStore.data.World.zpots.forEach(spot => {
+                state.push(spot)
+            })
+        }
+        if (mainStore.data.Units.base) {
+            mainStore.data.Units.base.forEach(base => {
+                state.push({ x: base.x, y: base.y, type: 'base', isHead: base.isHead, health: base.health })
+            })
+        }
+        if (mainStore.data.Units.zombies) {
+            mainStore.data.Units.zombies.forEach(zombie => {
+                state.push({ x: zombie.x, y: zombie.y, type: zombie.type, isZombie: true, speed: zombie.speed, direction: zombie.direction, health: zombie.health })
+            })
+        }
+        if (mainStore.data.Units.enemyBlocks) {
+            mainStore.data.Units.enemyBlocks.forEach(enemy => {
+                state.push({ x: enemy.x, y: enemy.y, type: enemy.type, isHead: enemy.isHead, health: enemy.health })
+            })
+        }
+        drawGrid()
+    }, { deep: true })
 })
 </script>
 <template>

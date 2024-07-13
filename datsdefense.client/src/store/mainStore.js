@@ -1,5 +1,5 @@
 // import PlayService from '@/openapi/services/PlayService'
-import { reactive } from 'vue'
+import { computed, reactive } from 'vue'
 import ApiService from '@/utils/ApiService'
 import { FindTargets, CheckMainBlockAndChange, GetBuilds } from '@/utils/logica'
 import { defineStore }  from 'pinia'
@@ -152,6 +152,8 @@ export const useMainStore = defineStore('main', () => {
         data.Gold = 10
     }
 
+    const units = computed(()=> data.Units), 
+    world = computed(()=> data.World)
 
-    return { data, StartRound, SetRequestMove, AddBuildToRequest, StopRound, GoWithoutStart }
+    return { data, world, units, StartRound, SetRequestMove, AddBuildToRequest, StopRound, GoWithoutStart }
 })

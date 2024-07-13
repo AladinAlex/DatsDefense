@@ -12,18 +12,18 @@ const start = () => {
   time.value = mainStore.data.SecondToStart
   clearInterval(intId)
   intId = setInterval(() => {
-    time.value -=1;
+    time.value -= 1;
   }, 1000)
 }
 
 const onClick = (x, y, type) => {
-  if(type === 1) // нажато на нашу базу
+  if (type === 1) // нажато на нашу базу
   {
-    mainStore.SetRequestMove(x,y)
+    mainStore.SetRequestMove(x, y)
   }
-  if(type === 2) // нажато для строительства
+  if (type === 2) // нажато для строительства
   {
-    mainStore.AddBuildToRequest(x,y)
+    mainStore.AddBuildToRequest(x, y)
   }
 }
 
@@ -34,7 +34,8 @@ start()
   <main>
     <div class="split-screen">
       <div class="left-block">
-        <Map @click="onClick"/>
+        <Map :size="{ height: 900, width: 900 }" @click="onClick" />
+        <Map :size="{ height: 300, width: 300 }" :mini="true" />
       </div>
       <div class="right-block" style="margin-left: 10px;">
         <div>
@@ -69,8 +70,7 @@ start()
           </div>
         </div>
       </div>
-    <Map :size="{ height: 900, width: 900 }" />
-    <Map :size="{ height: 300, width: 300 }" :mini="true" />
+    </div>
     <div>
       Action:
       <button>Купить клетку</button>
@@ -81,42 +81,48 @@ start()
 </template>
 
 <style lang="scss">
-  .pp {
-    display: flex;
-  }
-  .split-screen {
-    // display: grid;
-    // grid-template-columns: repeat(2, 1fr);
-    display: flex;
-    .left-block {
-      flex: 7; /* Occupy 70% of the available space */
-    }
+.pp {
+  display: flex;
+}
 
-    .right-block {
-      flex: 3; /* Occupy 30% of the available space */
-    }  
-  }
-  .log {
-    margin-top: 20px;
-    border: 1px solid gold;
+.split-screen {
+  // display: grid;
+  // grid-template-columns: repeat(2, 1fr);
+  display: flex;
 
-    .inner_log {
-      margin: 2px;
-      border: 1px solid rgb(41, 94, 50);
-    }
-  }
-  .error {
-    margin-top: 20px;
-    border: 1px solid red;
-
-    .inner_error {
-      margin: 2px;
-      border: 1px solid darksalmon;
-    }
+  .left-block {
+    flex: 7;
+    /* Occupy 70% of the available space */
   }
 
-  .text {
-    font-size: 12px;
-    font-weight: 500;
+  .right-block {
+    flex: 3;
+    /* Occupy 30% of the available space */
   }
+}
+
+.log {
+  margin-top: 20px;
+  border: 1px solid gold;
+
+  .inner_log {
+    margin: 2px;
+    border: 1px solid rgb(41, 94, 50);
+  }
+}
+
+.error {
+  margin-top: 20px;
+  border: 1px solid red;
+
+  .inner_error {
+    margin: 2px;
+    border: 1px solid darksalmon;
+  }
+}
+
+.text {
+  font-size: 12px;
+  font-weight: 500;
+}
 </style>
