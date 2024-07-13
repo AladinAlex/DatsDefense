@@ -199,7 +199,7 @@ onMounted(() => {
     setTimeout(() => {
         drawGrid();
     }, 5000);
-    watch(() => mainStore.world.value, () => {
+    const reacalState = () => {
         state.length = 0
         if (mainStore.data.World.zpots) {
             mainStore.data.World.zpots.forEach(spot => {
@@ -221,30 +221,21 @@ onMounted(() => {
                 state.push({ x: enemy.x, y: enemy.y, type: enemy.type, isHead: enemy.isHead, health: enemy.health })
             })
         }
+    }
+    watch(() => mainStore.data.World.zpots, () => {
+        reacalState()
         drawGrid()
     }, { deep: true })
-    watch(() => mainStore.units.value, () => {
-        state.length = 0
-        if (mainStore.data.World.zpots) {
-            mainStore.data.World.zpots.forEach(spot => {
-                state.push(spot)
-            })
-        }
-        if (mainStore.data.Units.base) {
-            mainStore.data.Units.base.forEach(base => {
-                state.push({ x: base.x, y: base.y, type: 'base', isHead: base.isHead, health: base.health })
-            })
-        }
-        if (mainStore.data.Units.zombies) {
-            mainStore.data.Units.zombies.forEach(zombie => {
-                state.push({ x: zombie.x, y: zombie.y, type: zombie.type, isZombie: true, speed: zombie.speed, direction: zombie.direction, health: zombie.health })
-            })
-        }
-        if (mainStore.data.Units.enemyBlocks) {
-            mainStore.data.Units.enemyBlocks.forEach(enemy => {
-                state.push({ x: enemy.x, y: enemy.y, type: enemy.type, isHead: enemy.isHead, health: enemy.health })
-            })
-        }
+    watch(() => mainStore.data.Units.base, () => {
+        reacalState()
+        drawGrid()
+    }, { deep: true })
+    watch(() => mainStore.data.Units.zombies, () => {
+        reacalState()
+        drawGrid()
+    }, { deep: true })
+    watch(() => mainStore.data.Units.enemyBlocks, () => {
+        reacalState()
         drawGrid()
     }, { deep: true })
 })
