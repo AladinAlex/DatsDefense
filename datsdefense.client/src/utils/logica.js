@@ -256,7 +256,8 @@ export const GetBuilds = (bases, enemyBlocks, zombies, zpots, wall, gold) => {
     let r;
     bases?.forEach((a) => {
         r = GetBuild(a, bases, enemyBlocks, zombies, zpots, wall, gold)
-        allNewBlocks.concat(r)
+        console.log('СМОТРИ СЮДА!', r)
+        allNewBlocks = allNewBlocks.concat(r)
     });
     
     console.log('return allNewBlocks', allNewBlocks)

@@ -35,9 +35,9 @@ start()
     <div class="split-screen">
       <div class="left-block">
         <Map :size="{ height: 900, width: 900 }" @click="onClick" />
-        <Map :size="{ height: 300, width: 300 }" :mini="true" />
       </div>
       <div class="right-block" style="margin-left: 10px;">
+        <Map :size="{ height: 300, width: 300 }" :mini="true" />
         <div>
           <span class="text">Время до старта: {{ time }}</span>
         </div>

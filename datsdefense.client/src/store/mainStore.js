@@ -112,7 +112,7 @@ export const useMainStore = defineStore('main', () => {
 
         let zpts = data.World.zpots?.filter(x => x.type === 'default')
         let wls = data.World.zpots?.filter(x => x.type === 'wall')
-        let newBlock = GetBuilds(data.Units.base, data.Units.enemyBlocks, data.Units.zombies, zpts, wls)
+        let newBlock = GetBuilds(data.Units.base, data.Units.enemyBlocks, data.Units.zombies, zpts, wls, data.Gold)
         console.log('newBlock', newBlock)
         __rr.build = newBlock
 

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://games-test.datsteam.dev'
+// const BASE_URL = 'https://games-test.datsteam.dev'
+const BASE_URL = 'https://games.datsteam.dev'
 const X_AUTH_TOKEN = '668ee4f86d598668ee4f86d59b';
 
 const apiClient = axios.create({
