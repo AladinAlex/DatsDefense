@@ -18,6 +18,7 @@ const start = () => {
 
 const onClick = (x, y, type) => {
   console.log('click', x, y, type)
+  console.log('ТИИИИИИИИИИИИИИИИИИИИП КЛИКА!', type)
   if (type === 1) // нажато на нашу базу
   {
     mainStore.SetRequestMove(x, y)

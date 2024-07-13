@@ -161,18 +161,19 @@ onMounted(() => {
 
     if (!props.mini) {
         document.addEventListener('keydown', (event) => {
+            const step = gridSize + 30;
             switch (event.key) {
                 case 'ArrowUp':
-                    moveGrid(0, gridSize);
+                    moveGrid(0, step);
                     break;
                 case 'ArrowDown':
-                    moveGrid(0, -gridSize);
+                    moveGrid(0, -step);
                     break;
                 case 'ArrowLeft':
-                    moveGrid(gridSize, 0);
+                    moveGrid(step, 0);
                     break;
                 case 'ArrowRight':
-                    moveGrid(-gridSize, 0);
+                    moveGrid(-step, 0);
                     break;
             }
         })
