@@ -10,73 +10,72 @@ const apiClient = axios.create({
       'Content-Type': 'application/json'
     }
   });
-export const Participate = async() => {
-  let response
+
+export default {
+  Participate: async () => {
+    let response
+      try {
+          response = await apiClient.put('/play/zombidef/participate');
+          return response.data;
+        }
+        catch (error) {
+          console.log('При вызове метода Participate произошла ошибка: ', error);
+          return {
+            error: error.response.data?.error ?? ('При вызове метода Participate произошла ошибка: ' + error)
+          }
+        }
+  },
+  Command: async(request) => {
+    let response
+      console.log('Request для метода Command:', request)
+      try {
+          response = await apiClient.post('/play/zombidef/command', request);
+          return response.data;
+        }
+        catch (error) {
+          console.log('При вызове метода Command произошла ошибка: ', error);
+          return {
+            error: error.response.data?.error ?? ('При вызове метода Command произошла ошибка: ' + error)
+          } 
+        }
+  },
+  Units: async() => {
+    let response
+      try {
+          response = await apiClient.get('/play/zombidef/units');
+          return response.data;
+        }
+        catch (error) {
+          console.log('При вызове метода Units произошла ошибка: ', error);
+          return {
+            error: error.response.data?.error ?? ('При вызове метода Units произошла ошибка: ' + error)
+          }
+        }
+  },
+  World: async() => {
+    let response
     try {
-        response = await apiClient.put('/play/zombidef/participate');
+        response = await apiClient.get('/play/zombidef/world');
         return response.data;
       }
       catch (error) {
-        console.error('При вызове метода Participate произошла ошибка: ', error);
+        console.log('При вызове метода World произошла ошибка: ', error);
         return {
-          error: response.error ?? ('При вызове метода Participate произошла ошибка: ' + error)
+          error: error.response.data?.error ?? ('При вызове метода World произошла ошибка: ' + error)
         }
       }
-}
-
-export const Command = async(request) => {
-  let response
-    console.log('Request для метода Command:', request)
+  },
+  GameRounds: async() => {
+    let response
     try {
-        response = await apiClient.post('/play/zombidef/command', request);
+        response = await apiClient.get('/rounds/zombidef');
         return response.data;
       }
       catch (error) {
-        console.error('При вызове метода Command произошла ошибка: ', error);
+        console.log('При вызове метода GameRounds произошла ошибка: ', error);
         return {
-          error: response.error ?? ('При вызове метода Command произошла ошибка: ' + error)
-        } 
-      }
-}
-
-export const Units = async() => {
-  let response
-    try {
-        response = await apiClient.get('/play/zombidef/units');
-        return response.data;
-      }
-      catch (error) {
-        console.error('При вызове метода Units произошла ошибка: ', error);
-        return {
-          error: response.error ?? ('При вызове метода Units произошла ошибка: ' + error)
+          error: error.response.data?.error ?? ('При вызове метода GameRounds произошла ошибка: ' + error)
         }
       }
-}
-
-export const World = async() => {
-  let response
-  try {
-      response = await apiClient.get('/play/zombidef/world');
-      return response.data;
-    }
-    catch (error) {
-      console.error('При вызове метода World произошла ошибка: ', error);
-      return {
-        error: response.error ?? ('При вызове метода World произошла ошибка: ' + error)
-      }
-    }
-}
-
-export const GameRounds = async() => {
-  let response
-  try {
-      response = await apiClient.get('/rounds/zombidef');
-      return response.data;
-    }
-    catch (error) {
-      console.error('При вызове метода GameRounds произошла ошибка: ', error);
-      return {
-        error: response.error ?? ('При вызове метода GameRounds произошла ошибка: ' + error)
-      }
-    }
+  }
 }
