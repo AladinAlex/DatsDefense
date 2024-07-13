@@ -5,6 +5,11 @@ import Map from './components/Map.vue'
 <template>
   <main>
     <Map />
+    <div>
+      Action:
+      <button>Купить клетку</button>
+      <button>Перемещение</button>
+    </div>
   </main>
 
 </template>

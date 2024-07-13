@@ -139,5 +139,7 @@ onMounted(() => {
 })
 </script>
 <template>
-    <canvas ref="canvas" width="3000" height="3000"></canvas>
+    <div class="map">
+        <canvas ref="canvas" width="2400" height="2400"></canvas>
+    </div>
 </template>

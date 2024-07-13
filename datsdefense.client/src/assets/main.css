@@ -1,8 +1,8 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
+  /* max-width: 1280px; */
+  margin:  auto;
   padding: 2rem;
   font-weight: normal;
 }
@@ -15,13 +15,7 @@ a,
   padding: 3px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
 
-@media (min-width: 1024px) {
   body {
     display: flex;
     place-items: center;
@@ -29,7 +23,8 @@ a,
 
   #app {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; /* two columns of equal width */
+    gap: 20px; /* add a gap between the columns */
     padding: 0 2rem;
   }
-}
+
