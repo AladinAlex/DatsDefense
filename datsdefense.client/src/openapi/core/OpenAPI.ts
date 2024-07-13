@@ -20,7 +20,8 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-    BASE: 'https://games.datsteam.dev',
+    BASE: 'https://games-test.datsteam.dev',
+    // BASE: 'https://games.datsteam.dev',
     VERSION: '1.0',
     WITH_CREDENTIALS: false,
     CREDENTIALS: 'include',

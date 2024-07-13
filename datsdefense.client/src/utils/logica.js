@@ -121,7 +121,7 @@ export const FindBestCoordsByZombie = (base, mas) => {
     let minDist = base.range;
   
     mas.forEach((a) => {
-      const dist = Math.sqrt(Math.pow(x1 - x, 2) + Math.pow(y1 - y, 2));
+      const dist = Math.sqrt(Math.pow(a.x - base.x, 2) + Math.pow(a.y - base.y, 2));
       if (dist <= minDist) {
         nearest = a;
         minDist = dist;
@@ -158,7 +158,7 @@ export const FindBestCoordsByBlock = (base, mas) => {
     let minDist = base.range;
   
     mas.forEach((a) => {
-      const dist = Math.sqrt(Math.pow(x1 - x, 2) + Math.pow(y1 - y, 2));
+      const dist = Math.sqrt(Math.pow(a.x - base.x, 2) + Math.pow(a.y - base.y, 2));
       if (dist <= minDist) {
         nearest = a;
         minDist = dist;
@@ -214,8 +214,9 @@ export const FindTargets = (bases, zombies, enemyBlocks) => {
 }
 
 export const CheckMainBlockAndChange = (currentHealth, prevHealth, bases) => {
-    if(currentHealth < prevHealth)
+    if(currentHealth < prevHealth && Array.isArray(bases) && bases.length > 0)
     {
+        bases = bases.filter(z => z.isHead !== true)
         bases = bases.sort((a,b) => {
             return b.health - a.health;
         })
@@ -230,5 +231,4 @@ export const CheckMainBlockAndChange = (currentHealth, prevHealth, bases) => {
             x: -1,
             y: -1
         }
-    
 }
