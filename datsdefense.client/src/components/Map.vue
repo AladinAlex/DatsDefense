@@ -127,24 +127,29 @@ onMounted(() => {
         console.log(renderObject)
         if (renderObject.length) {
             renderObject.forEach(p => {
-                const x = p.x * gridSize + gridOffsetX, y = p.y * gridSize + gridOffsetY
-                ctx.drawImage(images[p.type], x, y, gridSize, gridSize)
-                if (!props.mini && p.health) {
-                    ctx.fillStyle = '#fc0303';
-                    const procent = calculatePercentage(gridSize, 5),
-                        diff = gridSize - procent
+                try {
+                    const x = p.x * gridSize + gridOffsetX, y = p.y * gridSize + gridOffsetY
+                    ctx.drawImage(images[p.type], x, y, gridSize, gridSize)
+                    if (!props.mini && p.health) {
+                        ctx.fillStyle = '#fc0303';
+                        const procent = calculatePercentage(gridSize, 5),
+                            diff = gridSize - procent
 
-                    ctx.fillRect(x - procent, y - procent, gridSize, calculatePercentage(gridSize, 5))
+                        ctx.fillRect(x - procent, y - procent, gridSize, calculatePercentage(gridSize, 5))
+                    }
+                    if (p.isHead) {
+                        ctx.drawImage(images.player, x, y, gridSize, gridSize)
+                    }
+                    // if (p.isZombie && !props.mini && p.type != 'chaos_knight') {
+                    //     if (p.direction == 'right')
+                    //         drawArrow(x, y + gridSize / 2, x + p.speed * gridSize, y + gridSize / 2)
+                    //     else if (p.direction == 'left')
+                    //         drawArrow(x + p.speed * gridSize, y + gridSize / 2, x, y + gridSize / 2)
+                    // }
                 }
-                if (p.isHead) {
-                    ctx.drawImage(images.player, x, y, gridSize, gridSize)
+                catch (ex) {
+                    console.error(ex)
                 }
-                // if (p.isZombie && !props.mini && p.type != 'chaos_knight') {
-                //     if (p.direction == 'right')
-                //         drawArrow(x, y + gridSize / 2, x + p.speed * gridSize, y + gridSize / 2)
-                //     else if (p.direction == 'left')
-                //         drawArrow(x + p.speed * gridSize, y + gridSize / 2, x, y + gridSize / 2)
-                // }
             })
         }
     }
@@ -222,19 +227,32 @@ onMounted(() => {
             })
         }
     }
+    const setCenterToBase = () => {
+        if (mainStore.data.Units.base && mainStore.data.Units.base.length) {
+            const findHead = mainStore.data.Units.base.find(x => x.isHead)
+            if (findHead) {
+                gridOffsetX = findHead.x * gridSize
+                gridOffsetY = findHead.y * gridSize
+            }
+        }
+    }
     watch(() => mainStore.data.World.zpots, () => {
+        setCenterToBase()
         reacalState()
         drawGrid()
     }, { deep: true })
     watch(() => mainStore.data.Units.base, () => {
+        setCenterToBase()
         reacalState()
         drawGrid()
     }, { deep: true })
     watch(() => mainStore.data.Units.zombies, () => {
+        setCenterToBase()
         reacalState()
         drawGrid()
     }, { deep: true })
     watch(() => mainStore.data.Units.enemyBlocks, () => {
+        setCenterToBase()
         reacalState()
         drawGrid()
     }, { deep: true })
