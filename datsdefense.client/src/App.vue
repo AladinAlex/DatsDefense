@@ -16,14 +16,14 @@ const start = () => {
   }, 1000)
 }
 
-const onClick = (x, y, type) => {
+const onClick = ({x, y, type}) => {
   console.log('click', x, y, type)
-  console.log('ТИИИИИИИИИИИИИИИИИИИИП КЛИКА!', type)
-  if (type === 1) // нажато на нашу базу
+  // console.log('ТИИИИИИИИИИИИИИИИИИИИП КЛИКА!', type, x, y)
+  if (type == 1) // нажато на нашу базу
   {
     mainStore.SetRequestMove(x, y)
   }
-  if (type === 2) // нажато для строительства
+  if (type == 2) // нажато для строительства
   {
     mainStore.AddBuildToRequest(x, y)
   }

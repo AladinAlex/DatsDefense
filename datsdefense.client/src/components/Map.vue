@@ -107,7 +107,7 @@ onMounted(() => {
         return state.filter(p => p.x >= beginX && p.x <= endX && p.y >= beginY && p.y <= endY)
     }
     const drawGrid = () => {
-        ctx.clearRect(0, 0, canvas.value.width, canvas.value.height);
+        ctx.clearRect(0, 0, canvas.value?.width, canvas.value?.height);
         ctx.beginPath();
         ctx.strokeStyle = 'gray';
         ctx.lineWidth = 0.5;
@@ -124,7 +124,7 @@ onMounted(() => {
 
         ctx.stroke()
         const renderObject = findRectangleRender()
-        console.log(renderObject)
+        // console.log(renderObject)
         if (renderObject.length) {
             renderObject.forEach(p => {
                 try {
@@ -161,8 +161,7 @@ onMounted(() => {
 
     if (!props.mini) {
         document.addEventListener('keydown', (event) => {
-            const step = gridSize + 20
-            const step = gridSize + 30;
+            const step = gridSize * 30;
             switch (event.key) {
                 case 'ArrowUp':
                     moveGrid(0, step);

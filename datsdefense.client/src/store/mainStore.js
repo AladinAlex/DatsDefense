@@ -97,6 +97,13 @@ export const useMainStore = defineStore('main', () => {
             build: [],
             moveBase: null
           }
+
+          let zpts = data.World.zpots?.filter(x => x.type === 'default')
+          let wls = data.World.zpots?.filter(x => x.type === 'wall')
+          let newBlock = GetBuilds(data.Units.base, data.Units.enemyBlocks, data.Units.zombies, zpts, wls, data.Gold)
+          console.log('newBlock', newBlock)
+          __rr.build = newBlock
+
           __rr.attack = FindTargets(data.Units.base, data.Units.zombies, data.Units.enemyBlocks)
 
         const foundBase = data.Units.base?.find(z => z.isHead === true);
@@ -109,12 +116,6 @@ export const useMainStore = defineStore('main', () => {
                 }
             data.MainBlockHealth = foundBase.health
         }
-
-        let zpts = data.World.zpots?.filter(x => x.type === 'default')
-        let wls = data.World.zpots?.filter(x => x.type === 'wall')
-        let newBlock = GetBuilds(data.Units.base, data.Units.enemyBlocks, data.Units.zombies, zpts, wls, data.Gold)
-        console.log('newBlock', newBlock)
-        __rr.build = newBlock
 
         data.Request = __rr
     }
